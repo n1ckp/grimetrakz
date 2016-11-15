@@ -1,3 +1,40 @@
-h1 {
-  color: red;
+$theme-primary: #696969;
+$theme-dark: #232323;
+$theme-light: #fff;
+
+body {
+  background-color: $theme-primary;
+  color: $theme-light;
+}
+
+.top-bar {
+  background-color: $theme-primary;
+  color: $theme-light;
+  height: 10%;
+  .top-bar-title {
+    font-size: 40px;
+    font-weight: bolder;
+    color: darken($theme-light, 20%);
+  }
+}
+
+footer {
+  padding: 20px;
+  background-color: $theme-primary;
+  bottom: 10%;
+  height: 10%;
+  width: 100%;
+  p > span {
+    color: darken($theme-light, 20%);
+  }
+}
+
+#main, div[data-reactroot] {
+  height: 100%;
+}
+
+.container {
+  background-color: $theme-dark;
+  height: 80%;
+  padding: 25px;
 }
