@@ -33,12 +33,6 @@ export default class TrackList extends Component {
     this.fetchTopTracks();
   }
 
-  renderButton() {
-    if (this.state.numTracksDisplayed !== 10) {
-      return (<button type="button" className="button" onClick={this.getTopTen.bind(this)}>Get Top 10</button>);
-    }
-  }
-
   renderTracks() {
     if (this.state.tracks.length === 0) {
       return (<p>Fetching tracks...</p>);
@@ -52,7 +46,13 @@ export default class TrackList extends Component {
     return (
       <div className="container text-center">
         <h1>Tempa T's Top {this.state.numTracksDisplayed} Trackz</h1>
-        { this.renderButton() }
+        <button
+          type="button"
+          className="button"
+          disabled={this.state.numTracksDisplayed === 10}
+          onClick={this.getTopTen.bind(this)}>
+          Get Top 10
+        </button>
         <div className="track-list">
           { this.renderTracks() }
         </div>
