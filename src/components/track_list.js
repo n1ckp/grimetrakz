@@ -20,6 +20,7 @@ export default class TrackList extends Component {
     };
     axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?` + querystring.stringify(query))
       .then((res) => {
+        console.log(res.data.tracks);
         this.setState({tracks: res.data.tracks});
       });
   }
@@ -52,7 +53,7 @@ export default class TrackList extends Component {
       <div className="container text-center">
         <h1>Tempa T's Top {this.state.numTracksDisplayed} Trackz</h1>
         { this.renderButton() }
-        <div className="track-list-container">
+        <div className="track-list">
           { this.renderTracks() }
         </div>
       </div>

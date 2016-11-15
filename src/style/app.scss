@@ -38,3 +38,33 @@ footer {
   height: 80%;
   padding: 25px;
 }
+
+.track-list {
+  max-height: 75%;
+  overflow-y: auto;
+}
+
+.track {
+  background-color: $theme-light;
+  color: $theme-dark;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  .track-player {
+    display: inline-block;
+    float: left;
+    padding: 5px;
+  }
+  .track-name {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 30px;
+    font-weight:300;
+  }
+  .track-album-name {
+    color: $theme-primary;
+  }
+  .track-number {
+    color: lighten($theme-primary, 20%);
+  }
+}
