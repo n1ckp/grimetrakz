@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <div>
         <Header/>
-        <div className="container">
+        <div className="container text-center">
           <h1>Tempa T's top 5 trackz</h1>
           <TrackList/>
         </div>

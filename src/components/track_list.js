@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TrackListItem from './track_list_item';
 
 export default class TrackList extends Component {
   constructor(props) {
@@ -16,14 +17,14 @@ export default class TrackList extends Component {
 
   renderTracks() {
     return this.state.tracks.map((track) => {
-      return (<li key={track.name}><h3>{track.name}</h3></li>);
+      return (<TrackListItem key={track.name} {...track} />);
     });
   }
 
   render() {
     return (
       <div className="track-list-container">
-        <ul>{ this.renderTracks() }</ul>
+        { this.renderTracks() }
       </div>
     );
   }
