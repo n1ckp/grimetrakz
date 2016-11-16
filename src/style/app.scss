@@ -1,4 +1,5 @@
 $theme-primary: #696969;
+$theme-secondary: #ffae00;
 $theme-dark: #232323;
 $theme-light: #fff;
 
@@ -47,7 +48,7 @@ footer {
 }
 
 .track-list {
-  max-height: 75%;
+  max-height: 70%;
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 800px;
@@ -69,6 +70,18 @@ footer {
   -webkit-animation-duration:1s;
   -moz-animation-duration:1s;
   animation-duration:1s;
+}
+
+.artist-tab {
+  margin: 20px;
+  font-weight: bolder;
+  &:hover {
+    color: darken($theme-light, 30%);
+    cursor: pointer;
+  }
+  &.selected {
+    color: $theme-secondary;
+  }
 }
 
 .track {

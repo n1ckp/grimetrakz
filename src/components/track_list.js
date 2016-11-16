@@ -6,21 +6,24 @@ import querystring from 'querystring';
 export default class TrackList extends Component {
   constructor(props) {
     super(props);
+    this.artists = [
+      { name: "Tempa T", id: "5itdSz26wZC57bo3dhQTPq" },
+      { name: "Westwood*", id: "1RjfpdWaIYqGbmDURVAbb0" },
+      { name: "JME", id: "4IZLJdhHCqAvT4pjn8TLH5" }
+    ];
     this.state = {
+      currentArtist: this.artists[0],
       numTracksDisplayed: 5,
       tracks: []
     };
   }
 
-  fetchTopTracks() {
-    // Spotify id for Tempa T (predetermined)
-    const id = "5itdSz26wZC57bo3dhQTPq";
+  fetchTopTracks(artist) {
     const query = {
       country: 'GB'
     };
-    axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?` + querystring.stringify(query))
+    axios.get(`https://api.spotify.com/v1/artists/${artist.id}/top-tracks?` + querystring.stringify(query))
       .then((res) => {
-        console.log(res.data.tracks);
         this.setState({tracks: res.data.tracks});
       });
   }
@@ -30,7 +33,7 @@ export default class TrackList extends Component {
   }
 
   componentDidMount() {
-    this.fetchTopTracks();
+    this.fetchTopTracks(this.state.currentArtist);
   }
 
   renderTracks() {
@@ -42,10 +45,29 @@ export default class TrackList extends Component {
     });
   }
 
+  changeArtist(artist) {
+    this.setState({ currentArtist: artist, numTracksDisplayed: 5, tracks: [] });
+    this.fetchTopTracks(artist);
+  }
+
+  renderTabs() {
+    return this.artists.map((artist) => {
+      return (
+        <span
+          className={(artist === this.state.currentArtist) ? "artist-tab selected" : "artist-tab"}
+          key={artist.id}
+          onClick={this.changeArtist.bind(this,artist)}>
+          {artist.name}
+        </span>
+      );
+    })
+  }
+
   render() {
     return (
       <div className="container text-center">
-        <h1>Tempa T's Top {this.state.numTracksDisplayed} Trackz</h1>
+        { this.renderTabs() }
+        <h1>{this.state.currentArtist.name}'s Top {this.state.numTracksDisplayed} Trackz</h1>
         <button
           type="button"
           className="button"
@@ -56,6 +78,7 @@ export default class TrackList extends Component {
         <div className="track-list">
           { this.renderTracks() }
         </div>
+        <p className="disclaimer">* Probably not the real Tim Westwood, even though this artist's genre is listed as 'grime'.</p>
       </div>
     );
   }
