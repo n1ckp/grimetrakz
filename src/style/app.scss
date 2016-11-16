@@ -7,6 +7,11 @@ body {
   color: $theme-light;
 }
 
+h1 {
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
 .top-bar {
   background-color: $theme-primary;
   color: $theme-light;
@@ -44,6 +49,7 @@ footer {
 .track-list {
   max-height: 75%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .track {
@@ -83,5 +89,6 @@ footer {
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 12px;
   }
 }
