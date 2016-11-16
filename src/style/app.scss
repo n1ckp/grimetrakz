@@ -20,12 +20,14 @@ body {
 
 footer {
   padding: 20px;
+  padding-top: 25px;
   background-color: $theme-primary;
   bottom: 10%;
   height: 10%;
   width: 100%;
-  p > span {
+  .footer-date {
     color: darken($theme-light, 20%);
+    float: right;
   }
 }
 
