@@ -48,23 +48,38 @@ footer {
   background-color: $theme-light;
   color: $theme-dark;
   padding: 10px;
-  margin: 10px;
+  margin-bottom: 10px;
   text-align: left;
+  max-width: 800px;
   .track-player {
     display: inline-block;
     float: left;
     padding: 5px;
+    width: 100px;
+  }
+  .track-info {
+    width: 80%;
+    white-space: nowrap;
   }
   .track-name {
     font-weight: bold;
     display: inline-block;
-    font-size: 30px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 25px;
     font-weight:300;
   }
   .track-album-name {
     color: $theme-primary;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .track-number {
     color: lighten($theme-primary, 20%);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
