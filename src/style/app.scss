@@ -50,6 +50,25 @@ footer {
   max-height: 75%;
   overflow-y: auto;
   overflow-x: hidden;
+  max-width: 800px;
+  margin: 0px auto;
+}
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+@mixin myFadeIn {
+  opacity: 0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
 }
 
 .track {
@@ -58,12 +77,14 @@ footer {
   padding: 10px;
   margin-bottom: 10px;
   text-align: left;
-  max-width: 800px;
+  @include myFadeIn;
   .track-player {
     display: inline-block;
     float: left;
-    padding: 5px;
     width: 100px;
+    height: 80px;
+    width: 80px;
+    margin-right: 10px;
   }
   .track-info {
     width: 80%;
