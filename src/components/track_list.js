@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import TrackListItem from './track_list_item';
 import axios from 'axios';
@@ -14,7 +15,8 @@ export default class TrackList extends Component {
     this.state = {
       currentArtist: this.artists[0],
       numTracksDisplayed: 5,
-      tracks: []
+      tracks: [],
+      searchTerm: ""
     };
   }
 
@@ -63,9 +65,34 @@ export default class TrackList extends Component {
     })
   }
 
+  artistSearch(searchTerm) {
+    const query = {
+      type: "artist",
+      q: searchTerm
+    }
+    axios.get(`https://api.spotify.com/v1/search?` + querystring.stringify(query))
+      .then((res) => {
+        const artist = res.data.artists.items[0];
+        if (artist === undefined) { return; }
+
+        // only show tracks if artist has 'grime' as a genre
+        if (artist.genres.indexOf("grime") !== -1) {
+          this.changeArtist({name: artist.name, id: artist.id});
+        }
+      });
+  }
+
+  onSearchChange(searchTerm) {
+    this.setState({ searchTerm });
+    if (searchTerm === "") { return; }
+    const srch = _.debounce((x) => { this.artistSearch(x) }, 1000);
+    srch(searchTerm);
+  }
+
   render() {
     return (
       <div className="container text-center">
+        <input type="text" placeholder="Search" value={ this.state.searchTerm } onChange={event => {this.onSearchChange(event.target.value)}}></input>
         { this.renderTabs() }
         <h1>{this.state.currentArtist.name}'s Top {this.state.numTracksDisplayed} Trackz</h1>
         <button

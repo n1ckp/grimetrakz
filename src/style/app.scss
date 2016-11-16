@@ -45,10 +45,15 @@ footer {
   background-color: $theme-dark;
   height: 80%;
   padding: 25px;
+  input {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
 }
 
 .track-list {
-  max-height: 70%;
+  max-height: 60%;
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 800px;
