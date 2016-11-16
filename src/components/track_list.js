@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import TrackListItem from './track_list_item';
 import axios from 'axios';
 import querystring from 'querystring';
+
+import TrackListItem from './track_list_item';
+import SearchBar from './search_bar';
 
 export default class TrackList extends Component {
   constructor(props) {
@@ -15,8 +17,7 @@ export default class TrackList extends Component {
     this.state = {
       currentArtist: this.artists[0],
       numTracksDisplayed: 5,
-      tracks: [],
-      searchTerm: ""
+      tracks: []
     };
   }
 
@@ -82,17 +83,10 @@ export default class TrackList extends Component {
       });
   }
 
-  onSearchChange(searchTerm) {
-    this.setState({ searchTerm });
-    if (searchTerm === "") { return; }
-    const srch = _.debounce((x) => { this.artistSearch(x) }, 1000);
-    srch(searchTerm);
-  }
-
   render() {
     return (
       <div className="container text-center">
-        <input type="text" placeholder="Search" value={ this.state.searchTerm } onChange={event => {this.onSearchChange(event.target.value)}}></input>
+        <SearchBar onSearchChange={_.debounce((x) => { this.artistSearch(x) }, 1000)}/>
         { this.renderTabs() }
         <h1>{this.state.currentArtist.name}'s Top {this.state.numTracksDisplayed} Trackz</h1>
         <button
